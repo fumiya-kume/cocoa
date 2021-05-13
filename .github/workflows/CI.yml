@@ -12,6 +12,9 @@ jobs:
   build:
     name: Build
     runs-on: macos-latest
+    defaults:
+      run: 
+        working-directory: Covid19Radar
     steps:
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1
@@ -33,26 +36,20 @@ jobs:
         DOTNET_CLI_TELEMETRY_OPTOUT: true
     - name: Android.Debug
       run: |
-        cd Covid19Radar
         msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=Debug
     - name: Android.Debug_Mock
       run: |
-        cd Covid19Radar
         msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=Debug_Mock
     - name: Android.Release
       run: |
-        cd Covid19Radar
         msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=Release
     - name: iOS.Debug
       run: |
-        cd Covid19Radar
         msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=Debug /p:Platform=iPhoneSimulator
     - name: iOS.Debug_Mock
       run: |
-        cd Covid19Radar
         msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=Debug_Mock /p:Platform=iPhoneSimulator
     - name: iOS.Release
       run: |
-        cd Covid19Radar
         msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=Release /p:Platform=iPhoneSimulator
         
