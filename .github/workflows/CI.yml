@@ -15,6 +15,9 @@ jobs:
     defaults:
       run: 
         working-directory: Covid19Radar
+    strategy:
+      matrix:
+        Configuration: [Debug, Debug_Mock, Release]
     steps:
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1
@@ -34,22 +37,35 @@ jobs:
         dotnet test ${{ github.workspace }}/Covid19Radar/Tests/Covid19Radar.UnitTests/
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: true
-    - name: Android.Debug
+    - name: Android.${{ matrix.Configuration }}
       run: |
-        msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=Debug
-    - name: Android.Debug_Mock
-      run: |
-        msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=Debug_Mock
-    - name: Android.Release
-      run: |
-        msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=Release
+        msbuild ./Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
     - name: iOS.Debug
       run: |
-        msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=Debug /p:Platform=iPhoneSimulator
-    - name: iOS.Debug_Mock
+        msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator
+  test:
+    name: Test
+    runs-on: macos-latest
+    defaults:
+      run: 
+        working-directory: Covid19Radar
+    steps:
+    - name: setup-xamarin
+      uses: maxim-lobanov/setup-xamarin@v1
+      with:
+        mono-version: 6.12 # specify version in '<major>.<minor>' format
+        xamarin-ios-version: 14 # specify version in '<major>' format
+        xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
+        xamarin-android-version: 11.2 # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
+        xcode-version: 12 # set the latest available Xcode 11
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Prepare
       run: |
-        msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=Debug_Mock /p:Platform=iPhoneSimulator
-    - name: iOS.Release
+        nuget restore ${{ github.workspace }}/Covid19Radar.sln
+    - name: Tests
       run: |
-        msbuild ./Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=Release /p:Platform=iPhoneSimulator
+        dotnet test ${{ github.workspace }}/Covid19Radar/Tests/Covid19Radar.UnitTests/
+      env:
+        DOTNET_CLI_TELEMETRY_OPTOUT: true
         
