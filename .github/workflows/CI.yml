@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1
       with:
@@ -44,7 +44,7 @@ jobs:
         Configuration: [Debug, Debug_Mock, Release]
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
@@ -64,7 +64,7 @@ jobs:
         Configuration: [Debug, Debug_Mock, Release]
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
@@ -81,7 +81,7 @@ jobs:
     needs: prepare
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
