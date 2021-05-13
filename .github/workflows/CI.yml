@@ -30,7 +30,7 @@ jobs:
         xcode-version: 12 # set the latest available Xcode 11
     - name: iOS.${{ matrix.Configuration }}
       run: |
-        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator -r
+        dotnet msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator -r
   build_android:
     name: Build-Android
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Android.${{ matrix.Configuration }}
       run: |
-        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} -r
+        dotnet msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} -r
   test:
     name: Test
     runs-on: ubuntu-latest
