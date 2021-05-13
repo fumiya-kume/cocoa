@@ -8,6 +8,8 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+env:
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
 jobs:
   prepare:
     name: Prepare for Xamarin
@@ -31,7 +33,7 @@ jobs:
       env:
         cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
-        path: ~/.nuget/packages
+        path: $NUGET_PACKAGES
         key: $GITHUB_RUN_NUMBER
   build_ios:
     name: Build-iOS
@@ -48,7 +50,7 @@ jobs:
       env:
         cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
-        path: ~/.nuget/packages
+        path: $NUGET_PACKAGES
         key: $GITHUB_RUN_NUMBER
     - name: iOS.${{ matrix.Configuration }}
       run: |
@@ -68,7 +70,7 @@ jobs:
       env:
         cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
-        path: ~/.nuget/packages
+        path: $NUGET_PACKAGES
         key: $GITHUB_RUN_NUMBER
     - name: Android.${{ matrix.Configuration }}
       run: |
@@ -85,7 +87,7 @@ jobs:
       env:
         cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
-        path: ~/.nuget/packages
+        path: $NUGET_PACKAGES
         key: $GITHUB_RUN_NUMBER
     - name: Tests
       run: |
