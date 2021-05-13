@@ -30,7 +30,7 @@ jobs:
         xcode-version: 12 # set the latest available Xcode 11
     - name: iOS.${{ matrix.Configuration }}
       run: |
-        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator -r
+        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Build /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator -r
   build_android:
     name: Build-Android
     runs-on: windows-latest
@@ -43,7 +43,7 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
     - name: Build Solution
-      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /restore /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
+      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /restore /t:Build /p:Configuration=${{ matrix.Configuration }}
   test:
     name: Test
     runs-on: ubuntu-latest
