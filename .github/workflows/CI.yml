@@ -40,8 +40,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: build
-      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:restore /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }}
+    - name: Prepare Xamarin
+      run: |
+        dotnet restore ${{ github.workspace }}/Covid19Radar.sln
+    - name: Tests
+      run: |
+        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }}
+    # - name: build
+    #   run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:restore /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }}
   test:
     name: Test
     runs-on: ubuntu-latest
