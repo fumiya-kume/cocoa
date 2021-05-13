@@ -33,7 +33,7 @@ jobs:
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator -r
   build_android:
     name: Build-Android
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     strategy:
       matrix:
         Configuration: [Debug, Debug_Mock, Release]
@@ -41,13 +41,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Prepare Xamarin
-      run: |
-        dotnet restore ${{ github.workspace }}/Covid19Radar.sln
-    - name: Tests
-      run: |
-        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }}
-    # - name: build
-    #   run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:restore /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }}
+      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:restore /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }}
   test:
     name: Test
     runs-on: ubuntu-latest
