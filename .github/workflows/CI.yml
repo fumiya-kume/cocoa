@@ -29,7 +29,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin
+        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
         path: ~/.nuget/packages
         key: $GITHUB_RUN_NUMBER
@@ -46,7 +46,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin
+        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
         path: ~/.nuget/packages
         key: $GITHUB_RUN_NUMBER
@@ -66,7 +66,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin
+        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
         path: ~/.nuget/packages
         key: $GITHUB_RUN_NUMBER
@@ -83,7 +83,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin
+        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
       with:
         path: ~/.nuget/packages
         key: $GITHUB_RUN_NUMBER
