@@ -33,7 +33,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
+        cache-name: cache-xamarin-${{ github.run_number }}
       with:
         path: ${{ env.NUGET_PACKAGES }}
         key: ${{ github.run_number }}
@@ -52,7 +52,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
+        cache-name: cache-xamarin-${{ github.run_number }}
       with:
         path: ${{ env.NUGET_PACKAGES }}
         key: ${{ github.run_number }}
@@ -74,7 +74,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
+        cache-name: cache-xamarin-${{ github.run_number }}
       with:
         path: ${{ env.NUGET_PACKAGES }}
         key: ${{ github.run_number }}
@@ -93,7 +93,7 @@ jobs:
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
-        cache-name: cache-xamarin-$GITHUB_RUN_NUMBER
+        cache-name: cache-xamarin-${{ github.run_number }}
       with:
         path: ${{ env.NUGET_PACKAGES }}
         key: ${{ github.run_number }}
