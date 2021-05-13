@@ -42,8 +42,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Install dependencies
       run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
-    - name: Build
-      run: dotnet msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj -p:Configuration=${{ matrix.Configuration }} -p:t=PackageForAndroid
+    - name: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }} 
   test:
     name: Test
     runs-on: ubuntu-latest
