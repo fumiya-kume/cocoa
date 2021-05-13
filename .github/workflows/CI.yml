@@ -45,7 +45,7 @@ jobs:
     - name: Build Solution
       run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /restore /p:Configuration=${{ matrix.Configuration }}
     - name: Prepare Xamarin
-      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }}
+      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
   test:
     name: Test
     runs-on: ubuntu-latest
