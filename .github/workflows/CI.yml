@@ -40,13 +40,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Setup .NET Core SDK 
-      uses: actions/setup-dotnet@v1.8.0
-    - name: dotnet Restore
-      run: dotnet restore ${{ github.workspace }}/Covid19Radar.sln
-    - name: Android.${{ matrix.Configuration }}
-      run: |
-        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }} --no-incremental 
+    - name: Install dependencies
+      run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
+    - name: Build
+      run: dotnet msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }} -t PackageForAndroid
   test:
     name: Test
     runs-on: ubuntu-latest
