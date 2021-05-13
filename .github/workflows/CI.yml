@@ -44,7 +44,7 @@ jobs:
       run: dotnet restore ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj
     - name: Android.${{ matrix.Configuration }}
       run: |
-        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Build --configuration ${{ matrix.Configuration }}
+        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }}
   test:
     name: Test
     runs-on: ubuntu-latest
