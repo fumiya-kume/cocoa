@@ -32,7 +32,7 @@ jobs:
         cache-name: cache-xamarin
       with:
         path: ~/.nuget/packages
-        key: {{ $GITHUB_SHA }}
+        key: ${{ env.GITHUB_RUN_NUMBER }}
   build_ios:
     name: Build-iOS
     runs-on: macos-latest
@@ -49,7 +49,7 @@ jobs:
         cache-name: cache-xamarin
       with:
         path: ~/.nuget/packages
-        key: {{ $GITHUB_SHA }}
+        key: ${{ env.GITHUB_RUN_NUMBER }}
     - name: iOS.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator
@@ -69,7 +69,7 @@ jobs:
         cache-name: cache-xamarin
       with:
         path: ~/.nuget/packages
-        key: {{ $GITHUB_SHA }}
+        key: ${{ env.GITHUB_RUN_NUMBER }}
     - name: Android.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
@@ -86,7 +86,7 @@ jobs:
         cache-name: cache-xamarin
       with:
         path: ~/.nuget/packages
-        key: {{ $GITHUB_SHA }}
+        key: ${{ env.GITHUB_RUN_NUMBER }}
     - name: Tests
       run: |
         dotnet test ${{ github.workspace }}/Covid19Radar/Tests/Covid19Radar.UnitTests/
