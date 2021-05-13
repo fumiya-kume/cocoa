@@ -41,7 +41,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Restore
-      run: dotnet restore ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj
+      run: nugget restore ${{ github.workspace }}/Covid19Radar.sln
     - name: Android.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
