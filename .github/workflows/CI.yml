@@ -16,6 +16,8 @@ jobs:
       matrix:
         Configuration: [Debug, Debug_Mock, Release]
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1
       with:
@@ -24,13 +26,6 @@ jobs:
         xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
         xamarin-android-version: 11.2 # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
         xcode-version: 12 # set the latest available Xcode 11
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Tests
-      run: |
-        dotnet test ${{ github.workspace }}/Covid19Radar/Tests/Covid19Radar.UnitTests/
-      env:
-        DOTNET_CLI_TELEMETRY_OPTOUT: true
     - name: iOS.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator
@@ -41,6 +36,8 @@ jobs:
       matrix:
         Configuration: [Debug, Debug_Mock, Release]
     steps:
+    - name: Checkout
+      uses: actions/checkout@v1
     - name: setup-xamarin
       uses: maxim-lobanov/setup-xamarin@v1
       with:
@@ -49,13 +46,6 @@ jobs:
         xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
         xamarin-android-version: 11.2 # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
         xcode-version: 12 # set the latest available Xcode 11
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Tests
-      run: |
-        dotnet test ${{ github.workspace }}/Covid19Radar/Tests/Covid19Radar.UnitTests/
-      env:
-        DOTNET_CLI_TELEMETRY_OPTOUT: true
     - name: Android.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
