@@ -24,7 +24,10 @@ jobs:
       uses: maxim-lobanov/setup-xamarin@v1.2.1
       with:
         mono-version: 6.12 # specify version in '<major>.<minor>' format
+        xamarin-ios-version: 14 # specify version in '<major>' format
+        xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
         xamarin-android-version: 11.2 # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
+        xcode-version: 12 # set the latest available Xcode 11
     - name: iOS.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator -r
@@ -37,14 +40,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: setup-xamarin
-      uses: maxim-lobanov/setup-xamarin@v1.2.1
-      with:
-        mono-version: 6.12 # specify version in '<major>.<minor>' format
-        xamarin-ios-version: 14 # specify version in '<major>' format
-        xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
-        xamarin-android-version: 11.2 # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
-        xcode-version: 12 # set the latest available Xcode 11
     - name: Android.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} -r
