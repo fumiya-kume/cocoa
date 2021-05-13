@@ -27,7 +27,7 @@ jobs:
         xcode-version: 12 # set the latest available Xcode 11
     - name: Prepare Xamarin
       run: |
-        nuget restore --packages ${{ env.NUGET_PACKAGES }} ${{ github.workspace }}/Covid19Radar.sln
+        dotnet restore --packages ${{ env.NUGET_PACKAGES }} ${{ github.workspace }}/Covid19Radar.sln
     - name: Cache Xamarin
       uses: actions/cache@v2
       env:
