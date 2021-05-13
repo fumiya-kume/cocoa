@@ -28,10 +28,10 @@ jobs:
       uses: actions/checkout@v1
     - name: Prepare
       run: |
-        nuget restore Covid19Radar.sln
+        nuget restore ${{ github.workspace }}/Covid19Radar.sln
     - name: Tests
       run: |
-        dotnet test Covid19Radar/Tests/Covid19Radar.UnitTests/
+        dotnet test ${{ github.workspace }}/Covid19Radar/Tests/Covid19Radar.UnitTests/
       env:
         DOTNET_CLI_TELEMETRY_OPTOUT: true
     - name: Android.Debug
