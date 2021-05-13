@@ -43,7 +43,7 @@ jobs:
     # - name: Install dependencies
     #   run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
     - name: Build
-      run: dotnet msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj -- configuration ${{ matrix.Configuration }} -t PackageForAndroid -restore
+      run: dotnet msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj -- configuration ${{ matrix.Configuration }} -t PackageForAndroid -- restore
   test:
     name: Test
     runs-on: ubuntu-latest
