@@ -42,7 +42,7 @@ jobs:
       uses: actions/checkout@v2
     - name: Android.${{ matrix.Configuration }}
       run: |
-        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }} --force
+        dotnet build ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj --configuration ${{ matrix.Configuration }} --no-incremental 
   test:
     name: Test
     runs-on: ubuntu-latest
