@@ -42,8 +42,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
-    - name: restore
-      run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
+    - name: Build Solution
+      run: msbuild ./MyApplication.sln /restore /p:Configuration=${{ matrix.Configuration }}
     - name: Prepare Xamarin
       run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:restore /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }}
   test:
