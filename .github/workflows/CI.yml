@@ -40,12 +40,10 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Select default Xamarin bundle to 6_12_6
-      run: |
-        XAMARIN_SDK=6_12_6
-        $VM_ASSETS/select-xamarin-sdk.sh $XAMARIN_SDK
+    - name: Install dependencies
+      run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
     - name: build
-      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }} -r
+      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /t:PackageForAndroid /p:Configuration=${{ matrix.Configuration }} 
   test:
     name: Test
     runs-on: ubuntu-latest
