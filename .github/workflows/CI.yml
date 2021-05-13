@@ -54,7 +54,7 @@ jobs:
         key: $GITHUB_RUN_NUMBER
     - name: iOS.${{ matrix.Configuration }}
       run: |
-        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator
+        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator /p:Source=${{ env.NUGET_PACKAGES }}
   build_android:
     name: Build-Android
     runs-on: macos-latest
@@ -74,7 +74,7 @@ jobs:
         key: $GITHUB_RUN_NUMBER
     - name: Android.${{ matrix.Configuration }}
       run: |
-        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
+        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Source=${{ env.NUGET_PACKAGES }}
   test:
     name: Test
     runs-on: macos-latest
