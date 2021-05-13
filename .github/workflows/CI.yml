@@ -40,8 +40,8 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    # - name: Install dependencies
-    #   run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
+    - name: Install dependencies
+      run: nuget restore ${{ github.workspace }}/Covid19Radar.sln
     - name: Build
       run: dotnet msbuild -r ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj -p:Configuration=${{ matrix.Configuration }} -p:t=PackageForAndroid
   test:
