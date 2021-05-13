@@ -29,26 +29,6 @@ jobs:
     - name: iOS.${{ matrix.Configuration }}
       run: |
         msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /restore /t:Build /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator
-  rebuild_ios:
-    name: ReBuild-iOS
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        Configuration: [Debug, Debug_Mock, Release]
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: setup-xamarin
-      uses: maxim-lobanov/setup-xamarin@v1.2.1
-      with:
-        mono-version: 6.12 # specify version in '<major>.<minor>' format
-        xamarin-ios-version: 14 # specify version in '<major>' format
-        xamarin-mac-version: latest # specify 'latest' keyword to pick up the latest available version
-        xamarin-android-version: 11.2 # specify full version; it is not recomended option because your pipeline can be broken suddenly in future
-        xcode-version: 12 # set the latest available Xcode 11
-    - name: iOS.${{ matrix.Configuration }}
-      run: |
-        msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.iOS/Covid19Radar.iOS.csproj /restore /t:Rebuild /p:Configuration=${{ matrix.Configuration }} /p:Platform=iPhoneSimulator
   build_android:
     name: Build-Android
     runs-on: windows-latest
@@ -62,19 +42,6 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
     - name: Build Solution
       run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /restore /t:Build /p:Configuration=${{ matrix.Configuration }}
-  rebuild_android:
-    name: ReBuild-Android
-    runs-on: windows-latest
-    strategy:
-      matrix:
-        Configuration: [Debug, Debug_Mock, Release]
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: Build Solution
-      run: msbuild ${{ github.workspace }}/Covid19Radar/Covid19Radar.Android/Covid19Radar.Android.csproj /restore /t:Rebuild /p:Configuration=${{ matrix.Configuration }}
   test:
     name: Test
     runs-on: ubuntu-latest
